@@ -43,4 +43,10 @@ public class UserController {
         userService.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping
+    public ResponseEntity<Void> replace(@RequestBody User user) {
+        userService.replace(user);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }

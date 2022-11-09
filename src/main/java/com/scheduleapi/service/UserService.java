@@ -54,4 +54,9 @@ public class UserService {
     public void delete(UUID id) {
         users.remove(findById(id));
     }
+
+    public void replace(User user) {
+        delete(user.getIduser());
+        users.add(user);
+    }
 }
