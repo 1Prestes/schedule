@@ -37,4 +37,10 @@ public class UserController {
     public ResponseEntity<User> save(@RequestBody User user) {
         return new ResponseEntity(userService.save(user), HttpStatus.CREATED);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        userService.delete(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }

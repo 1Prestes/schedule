@@ -47,7 +47,11 @@ public class UserService {
     public User save(User user) {
         user.setIduser(UUID.randomUUID());
         users.add(user);
-        
+
         return user;
+    }
+
+    public void delete(UUID id) {
+        users.remove(findById(id));
     }
 }
