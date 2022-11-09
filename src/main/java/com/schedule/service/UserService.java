@@ -1,6 +1,7 @@
 package com.schedule.service;
 
 import com.schedule.domain.User;
+import com.schedule.mapper.UserMapper;
 import com.schedule.repository.UserRepository;
 import com.schedule.requests.UserPostRequestBody;
 import com.schedule.requests.UserPutRequestBody;
@@ -23,7 +24,6 @@ public class UserService {
     }
 
     public User findById(UUID id) {
-        System.out.println("teste " + id);
         return userRepository.findById(id)
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found.")
@@ -31,16 +31,10 @@ public class UserService {
     }
 
     public User save(UserPostRequestBody user) {
-        return userRepository.save(
-                User.builder()
-                        .id(UUID.randomUUID())
-                        .name(user.getName())
-                        .address(user.getAddress())
-                        .username(user.getUsername())
-                        .password(user.getPassword())
-                        .birthDate(user.getBirthDate())
-                        .build()
-        );
+        User userToSave = UserMapper.INSTANCE.toUser(user);
+        userToSave.setId(UUID.randomUUID());
+        System.out.println("Só teste " + UserMapper.INSTANCE.toUser(user));
+        return userRepository.save(userToSave);
     }
 
     public void delete(UUID id) {
@@ -49,14 +43,9 @@ public class UserService {
 
     public void replace(UserPutRequestBody user) {
         User savedUser = findById((UUID) user.getId());
-        User userToSave = User.builder()
-                .id(savedUser.getId())
-                .name(user.getName())
-                .address(user.getAddress())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .birthDate(user.getBirthDate())
-                .build();
+        User userToSave = UserMapper.INSTANCE.toUser(user);
+
+        userToSave.setId(savedUser.getId());
 
         userRepository.save(userToSave);
     }
