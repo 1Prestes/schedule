@@ -1,6 +1,8 @@
 package com.schedule.controller;
 
 import com.schedule.domain.User;
+import com.schedule.requests.UserPostRequestBody;
+import com.schedule.requests.UserPutRequestBody;
 import com.schedule.service.UserService;
 import com.schedule.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
+    public ResponseEntity<User> save(@RequestBody UserPostRequestBody user) {
         return new ResponseEntity(userService.save(user), HttpStatus.CREATED);
     }
 
@@ -45,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody User user) {
+    public ResponseEntity<Void> replace(@RequestBody UserPutRequestBody user) {
         userService.replace(user);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
