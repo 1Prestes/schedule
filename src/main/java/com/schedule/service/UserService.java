@@ -1,4 +1,4 @@
-package com.schedule.schedule.service;
+package com.schedule.service;
 
 import com.schedule.domain.User;
 import org.springframework.http.HttpStatus;
@@ -39,13 +39,13 @@ public class UserService {
 
     public User findById(UUID id) {
         return users.stream()
-                .filter(user -> user.getIduser().equals(id))
+                .filter(user -> user.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
     }
 
     public User save(User user) {
-        user.setIduser(UUID.randomUUID());
+        user.setId(UUID.randomUUID());
         users.add(user);
 
         return user;
@@ -56,7 +56,7 @@ public class UserService {
     }
 
     public void replace(User user) {
-        delete(user.getIduser());
+        delete(user.getId());
         users.add(user);
     }
 }

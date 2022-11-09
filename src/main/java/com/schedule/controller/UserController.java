@@ -1,4 +1,4 @@
-package com.schedule.schedule.controller;
+package com.schedule.controller;
 
 import com.schedule.domain.User;
 import com.schedule.service.UserService;

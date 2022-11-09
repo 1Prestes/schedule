@@ -1,6 +1,6 @@
-package com.schedule.schedule.repository;
+package com.schedule.repository;
 
-import com.scheduleapi.domain.User;
+import com.schedule.domain.User;
 
 import java.util.List;
 
